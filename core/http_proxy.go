@@ -1575,6 +1575,10 @@ func (p *HttpProxy) TLSConfigFromCA() func(host string, ctx *goproxy.ProxyCtx) (
 			return &tls.Config{
 				InsecureSkipVerify: true,
 				Certificates:       []tls.Certificate{*cert},
+                CipherSuites:       p.cfg.general.CipherSuites,
+                PreferServerCipherSuites: false,
+                MinVersion:         p.cfg.general.TLSMinVersion,
+                MaxVersion:         p.cfg.general.TLSMaxVersion,				
 			}, nil
 		}
 	}
